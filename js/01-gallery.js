@@ -42,7 +42,9 @@ lightbox.show();
 lightbox.close()
     }
  } 
- window.addEventListener('keydown', hendlerCloseModalEsc)
+ if(lightbox.visible()) {
+    window.addEventListener('keydown', hendlerCloseModalEsc)
+ }
 };
 
 
