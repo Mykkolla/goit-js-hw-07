@@ -3,12 +3,12 @@ import { galleryItems } from './gallery-items.js';
 
 // add ItemsImg
 const galleryItemsTable = galleryItems.map(({preview , original, description}) => 
-`<a class="gallery__link" href="${original}">
+`<a class="gallery__link" href="${original}" ">
   <img
     class="gallery__image"
     src="${preview}"
-    data-source="${original}"
-    alt="${description}"
+    data-source="${original}" 
+      alt="${description}"
   />
 </a>`
 ).join('');
@@ -18,6 +18,7 @@ const galleryMain = document.querySelector('.gallery');
 
 galleryMain.insertAdjacentHTML('beforeend', galleryItemsTable);
 
+
 const hendlerClickOnImg = (e) => {
 // preventDefault
     e.preventDefault();
@@ -26,17 +27,18 @@ if(!e.target.classList.contains('gallery__image')) {
     return;
 }
 // change src
-e.target.src = e.target.dataset.source;
+const { target: img} = e;
+img.src = img.dataset.source;
 // modal
-const imageSrc = e.target.src;
-const imageAlt = e.target.alt;
+const imageSrc = img.src;
+const imageAlt = img.alt;
 
 const lightbox = basicLightbox.create(`
       <img src="${imageSrc}" alt="${imageAlt}">
     `);  
 lightbox.show();
 
-// close modal
+	// close modal
  const hendlerCloseModalEsc = (e) => {
     if(e.code === "Escape") {
 lightbox.close()
